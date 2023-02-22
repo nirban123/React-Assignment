@@ -1,7 +1,7 @@
-import React, {useState, useEffect} from 'react';
-import logo from './logo.svg';
-import './App.css';
-import OwnerSearch from './OwnerSearch';
+import React, {useState, useEffect} from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import OwnerSearch from "./OwnerSearch";
 
 function App() {
   const [values, setValues] = useState({
@@ -22,7 +22,7 @@ function App() {
   };
 
   const handleOwnerSelect = (selectedVal) => {
-    console.log('selectedVal', selectedVal);
+    console.log("selectedVal", selectedVal);
   };
 
   const handleSubmit = (e) => {
@@ -151,8 +151,8 @@ function App() {
         <div className="row">
           <div className="col p-2">
             <label htmlFor="risk" className="form-label">
-              Risk/Issue Statement{' '}
-              <span className="bi bi-info-circle-fill blue-color"> </span>{' '}
+              Risk/Issue Statement{" "}
+              <span className="bi bi-info-circle-fill blue-color"> </span>{" "}
               <span className="text-danger">*</span>
             </label>
             <textarea
@@ -161,27 +161,27 @@ function App() {
               name="risk"
               onChange={(e) => changeHandler(e)}
               required
-              defaultValue={''}
+              defaultValue={""}
             />
           </div>
           <div className="col-1"></div>
           <div className="col p-2">
-            Root Cause{' '}
+            Root Cause{" "}
             <span className="bi bi-info-circle-fill blue-color"> </span>
             <textarea
               className="form-control form-control-sm"
               id="rootCause"
               name="rootCause"
               onChange={(e) => changeHandler(e)}
-              defaultValue={''}
+              defaultValue={""}
             />
           </div>
         </div>
         <div className="row">
           <div className="col p-2">
             <label htmlFor="itemDescription" className="form-label">
-              Item Description{' '}
-              <span className="bi bi-info-circle-fill blue-color"> </span>{' '}
+              Item Description{" "}
+              <span className="bi bi-info-circle-fill blue-color"> </span>{" "}
               <span className="text-danger">*</span>
             </label>
             <textarea
@@ -191,7 +191,7 @@ function App() {
               name="itemDescription"
               onChange={(e) => changeHandler(e)}
               required
-              defaultValue={''}
+              defaultValue={""}
             />
           </div>
           <div className="col-1"></div>
@@ -205,7 +205,7 @@ function App() {
               id="currentState"
               name="currentState"
               onChange={(e) => changeHandler(e)}
-              defaultValue={''}
+              defaultValue={""}
             />
           </div>
         </div>
@@ -215,7 +215,7 @@ function App() {
             <thead className="table-primary">
               <tr>
                 <th scope="col">
-                  Action Description{' '}
+                  Action Description{" "}
                   <i className="bi bi-plus-circle-fill blue-color" />
                 </th>
                 <th scope="col">Owner ID</th>
@@ -232,7 +232,7 @@ function App() {
                     className="form-control form-control-sm"
                     id="actionDescription"
                     name="actionDescription"
-                    defaultValue={''}
+                    defaultValue={""}
                   />
                 </td>
                 <td className="pt-3">
@@ -260,7 +260,7 @@ function App() {
                     className="form-control form-control-sm"
                     id="comments"
                     name="comments"
-                    defaultValue={''}
+                    defaultValue={""}
                   />
                 </td>
                 <td>
