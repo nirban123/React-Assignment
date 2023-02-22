@@ -6,19 +6,31 @@ import OwnerSearch from "./OwnerSearch";
 function App() {
   const [values, setValues] = useState({
     ownerDetails: [],
+    riskForum: [],
   });
 
   const changeHandler = (e) => {
     const name = e.target.name;
     let value = e.target.value;
-    let multiValue = [];
-    // if(name == 'riskForum') {
-    //     if(e.target.checked) {
-    //        multiValue.push(e.target.value);
-    //        value = multiValue;
-    //     }
-    // }
-    setValues((values) => ({...values, [name]: value}));
+    if (name === "riskForum") {
+      setValues((values) => {
+        const indx = values.riskForum.indexOf(value);
+        if (e.target.checked) {
+          if (indx < 0) {
+            // Insert the value
+            return {...values, riskForum: [...values.riskForum, value]};
+          }
+        } else {
+          // Remove the value
+          const newRiskForum = [...values.riskForum];
+          newRiskForum.splice(indx, 1);
+          return {...values, riskForum: newRiskForum};
+        }
+        return {...values, [name]: value};
+      });
+    } else {
+      setValues((values) => ({...values, [name]: value}));
+    }
   };
 
   const handleOwnerSelect = (selectedVal) => {
