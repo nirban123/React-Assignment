@@ -11,3 +11,17 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.blue-color {
+  color:blue;
+}
+
+.owner-search {
+  position: relative;
+}
+
+.hints-wrapper {
+  position: absolute;
+  z-index: 10;
+  width: 100%;
+}
