@@ -1,17 +1,19 @@
-import React, {useState, useEffect} from "react";
-import logo from "./logo.svg";
+import React, {useState} from "react";
 import "./App.css";
 import OwnerSearch from "./OwnerSearch";
+import Controller from "./Controller";
+import DisplayTable from "./DisplayTable";
 
 function App() {
+  const [totalValues, setTotalValues] = useState([]);
   const [values, setValues] = useState({
-    ownerDetails: [],
+    ownerDetails: [{}],
     riskForum: [],
   });
 
   const changeHandler = (e) => {
     const name = e.target.name;
-    let value = e.target.value;
+    const value = e.target.value;
     if (name === "riskForum") {
       setValues((values) => {
         const indx = values.riskForum.indexOf(value);
@@ -28,6 +30,12 @@ function App() {
         }
         return {...values, [name]: value};
       });
+    } else if (name.startsWith("owner-")) {
+      setValues((prevVal) => {
+        let newVal = {...prevVal};
+        newVal.ownerDetails[0] = {...newVal.ownerDetails[0], [name]: value};
+        return newVal;
+      });
     } else {
       setValues((values) => ({...values, [name]: value}));
     }
@@ -35,12 +43,26 @@ function App() {
 
   const handleOwnerSelect = (selectedVal) => {
     console.log("selectedVal", selectedVal);
+    setValues((prevVal) => {
+      let newVal = {...prevVal};
+      newVal.ownerDetails[0] = {
+        ...newVal.ownerDetails[0],
+        ownerId: selectedVal.id,
+        ownerName: selectedVal.name,
+      };
+      return newVal;
+    });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(values);
+    //fetch API
+    await Controller(values);
+    setTotalValues((totalValues) => [...totalValues, values]);
   };
+
+  console.log(totalValues);
+
   return (
     <div className="container mt-3">
       <form onSubmit={handleSubmit}>
@@ -55,6 +77,7 @@ function App() {
               name="sbu"
               onChange={(e) => changeHandler(e)}
               required>
+              <option value="">Select sbu</option>
               <option value="BFS">BFS</option>
               <option value="DFS">DFS</option>
             </select>
@@ -83,9 +106,10 @@ function App() {
               name="projectId"
               onChange={(e) => changeHandler(e)}
               required>
-              <option value>Select Project Id</option>
-              <option value="BFS">BFS</option>
-              <option value="DFS">DFS</option>
+              <option value="">Select Project Id</option>
+              <option value="1234">1234</option>
+              <option value="1235">1235</option>
+              <option value="2236">2236</option>
             </select>
           </div>
           <div className="col p-2">
@@ -99,8 +123,8 @@ function App() {
               onChange={(e) => changeHandler(e)}
               required>
               <option value>Select Category</option>
-              <option value="BFS">BFS</option>
-              <option value="DFS">DFS</option>
+              <option value="Category1">Category1</option>
+              <option value="Category2">Category2</option>
             </select>
           </div>
         </div>
@@ -127,9 +151,9 @@ function App() {
               name="severity"
               onChange={(e) => changeHandler(e)}
               required>
-              <option value>Select Severity</option>
-              <option value="BFS">BFS</option>
-              <option value="DFS">DFS</option>
+              <option value="">Select Severity</option>
+              <option value="High">High</option>
+              <option value="Low">Low</option>
             </select>
           </div>
           <div className="col-1"></div>
@@ -243,7 +267,8 @@ function App() {
                   <textarea
                     className="form-control form-control-sm"
                     id="actionDescription"
-                    name="actionDescription"
+                    name="owner-actionDescription"
+                    onChange={changeHandler}
                     defaultValue={""}
                   />
                 </td>
@@ -255,7 +280,8 @@ function App() {
                     type="text"
                     className="form-control form-control-sm"
                     id="ownerName"
-                    name="ownerName"
+                    name="owner-ownerName"
+                    value={values.ownerDetails[0].ownerName}
                     disabled
                   />
                 </td>
@@ -264,21 +290,23 @@ function App() {
                     type="date"
                     className="form-control form-control-sm"
                     id="target-closure-date"
-                    name="target-closure-date"
+                    name="owner-target-closure-date"
+                    onChange={(e) => changeHandler(e)}
                   />
                 </td>
                 <td>
                   <textarea
                     className="form-control form-control-sm"
                     id="comments"
-                    name="comments"
+                    name="owner-comments"
+                    onChange={(e) => changeHandler(e)}
                     defaultValue={""}
                   />
                 </td>
                 <td>
-                  <a href="#">
+                  {/* <a href="">
                     <i className="bi bi-trash" />
-                  </a>
+                  </a> */}
                 </td>
               </tr>
             </tbody>
@@ -307,9 +335,9 @@ function App() {
               name="impactArea"
               onChange={(e) => changeHandler(e)}
               required>
-              <option value>Select Impact Area</option>
-              <option value="BFS">BFS</option>
-              <option value="DFS">DFS</option>
+              <option value="">Select Impact Area</option>
+              <option value="Impact Area1">Impact Area1</option>
+              <option value="Impact Area2">Impact Area2</option>
             </select>
           </div>
           <div className="col-sm-1"></div>
@@ -399,6 +427,7 @@ function App() {
                 className="form-check-input"
                 type="checkbox"
                 name="riskForum"
+                checked={values.riskForum.includes("DDR")}
                 onChange={(e) => changeHandler(e)}
                 defaultValue="DDR"
               />
@@ -411,6 +440,7 @@ function App() {
                 className="form-check-input"
                 type="checkbox"
                 name="riskForum"
+                checked={values.riskForum.includes("ERR")}
                 onChange={(e) => changeHandler(e)}
                 defaultValue="ERR"
               />
@@ -423,6 +453,7 @@ function App() {
                 className="form-check-input"
                 type="checkbox"
                 name="riskForum"
+                checked={values.riskForum.includes("EC")}
                 onChange={(e) => changeHandler(e)}
                 defaultValue="EC"
               />
@@ -439,9 +470,11 @@ function App() {
               className="form-select form-select-sm form-control form-control-sm"
               id="status"
               name="status"
+              required
               onChange={(e) => changeHandler(e)}>
-              <option value="BFS">BFS</option>
-              <option value="DFS">DFS</option>
+              <option value="">Select Status</option>
+              <option value="Open Progressing">Open Progressing</option>
+              <option value="Open Deteriorating">Open Deteriorating</option>
             </select>
           </div>
           <div className="col-1"></div>
@@ -455,6 +488,10 @@ function App() {
           </div>
         </div>
       </form>
+      <br />
+      <div className="row">
+        {totalValues.length > 0 ? <DisplayTable data={totalValues} /> : ""}
+      </div>
     </div>
   );
 }
