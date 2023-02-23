@@ -22,7 +22,7 @@ const DisplayTable = (props) => {
           </tr>
         </thead>
         <tbody>
-          {props.data.map((ele, ind) => (
+          {props.data.map((ele) => (
             <tr key="main-table">
               <td key="sbu">{ele.sbu}</td>
               <td key="account">{ele.account}</td>
@@ -37,9 +37,7 @@ const DisplayTable = (props) => {
               <td key="status">{ele.status}</td>
               <td key="owner">Owner</td>
               <td key="eye">
-                <a href="">
-                  <i className="bi bi-eye"></i>
-                </a>
+                <i className="bi bi-eye"></i>
               </td>
             </tr>
           ))}

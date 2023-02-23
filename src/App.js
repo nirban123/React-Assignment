@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import "./App.css";
-import OwnerSearch from "./OwnerSearch";
+import OwnerFields from "./OwnerFields";
 import Controller from "./Controller";
 import DisplayTable from "./DisplayTable";
 
@@ -52,6 +52,13 @@ function App() {
       };
       return newVal;
     });
+  };
+
+  const handleOwnerAdd = () => {
+    setValues((prevVal) => ({
+      ...prevVal,
+      ownerDetails: [...prevVal.ownerDetails, {}],
+    }));
   };
 
   const handleSubmit = async (e) => {
@@ -247,70 +254,12 @@ function App() {
         </div>
         <br />
         <div className="row">
-          <table className="table table-bordered">
-            <thead className="table-primary">
-              <tr>
-                <th scope="col">
-                  Action Description{" "}
-                  <i className="bi bi-plus-circle-fill blue-color" />
-                </th>
-                <th scope="col">Owner ID</th>
-                <th scope="col">Owner Name</th>
-                <th scope="col">Target Closure Date</th>
-                <th scope="col">Comments</th>
-                <th scope="col">Delete</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  <textarea
-                    className="form-control form-control-sm"
-                    id="actionDescription"
-                    name="owner-actionDescription"
-                    onChange={changeHandler}
-                    defaultValue={""}
-                  />
-                </td>
-                <td className="pt-3">
-                  <OwnerSearch onChange={handleOwnerSelect} />
-                </td>
-                <td className="pt-3">
-                  <input
-                    type="text"
-                    className="form-control form-control-sm"
-                    id="ownerName"
-                    name="owner-ownerName"
-                    value={values.ownerDetails[0].ownerName}
-                    disabled
-                  />
-                </td>
-                <td className="pt-3">
-                  <input
-                    type="date"
-                    className="form-control form-control-sm"
-                    id="target-closure-date"
-                    name="owner-target-closure-date"
-                    onChange={(e) => changeHandler(e)}
-                  />
-                </td>
-                <td>
-                  <textarea
-                    className="form-control form-control-sm"
-                    id="comments"
-                    name="owner-comments"
-                    onChange={(e) => changeHandler(e)}
-                    defaultValue={""}
-                  />
-                </td>
-                <td>
-                  {/* <a href="">
-                    <i className="bi bi-trash" />
-                  </a> */}
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          <OwnerFields
+            onChange={changeHandler}
+            onChangeOwner={handleOwnerSelect}
+            onOwnerAdd={handleOwnerAdd}
+            ownerDetails={values.ownerDetails}
+          />
         </div>
         <div className="row">
           <div className="col p-2">
@@ -395,7 +344,7 @@ function App() {
           <div className="col-sm-1"></div>
           <div className="col p-2">
             <label htmlFor="revenueImpact" className="form-label">
-              Revenue Impact-FY'23($ MM)
+              Revenue Impact-FY&apos;23($ MM)
             </label>
             <input
               type="text"
@@ -407,7 +356,7 @@ function App() {
           </div>
           <div className="col p-2">
             <label htmlFor="marginImpact" className="form-label">
-              Margin Impact-FY'23($ MM)
+              Margin Impact-FY&apos;23($ MM)
             </label>
             <input
               type="text"
