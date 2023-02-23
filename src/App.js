@@ -1,39 +1,10 @@
 import React, {useState} from "react";
 import "./App.css";
-import OwnerFields from "./OwnerFields";
-import Controller from "./Controller";
-import DisplayTable from "./DisplayTable";
-const initialState = {
-  ownerDetails: [
-    {
-      id: 0,
-      "owner-actionDescription": "",
-      ownerId: "",
-      ownerName: "",
-      "owner-comments": "",
-      "owner-target-closure-date": "",
-    },
-  ],
-  riskForum: [],
-  category: "",
-  sbu: "",
-  account: "",
-  projectId: "",
-  severity: "",
-  region: "",
-  location: "",
-  rootCause: "",
-  itemDescription: "",
-  risk: "",
-  totalFTEs: "",
-  impactArea: "",
-  issueResolutionDate: "",
-  businessImpact: "",
-  status: "",
-  dhdIssueId: "",
-  revenueImpact: "",
-  marginImpact: "",
-};
+import OwnerFields from "./Components/OwnerFields";
+import Controller from "./API/Controller";
+import DisplayTable from "./Components/DisplayTable";
+import {initialState} from "./Constants/constant";
+
 function App() {
   const [totalValues, setTotalValues] = useState([]);
   const [values, setValues] = useState(initialState);
@@ -98,7 +69,7 @@ function App() {
     setTotalValues((totalValues) => [...totalValues, values]);
     setValues(JSON.parse(JSON.stringify(initialState)));
   };
-  console.log(values);
+
   const deleteHandler = (index) => {
     setValues((prevVal) => {
       let newVal = {...prevVal};

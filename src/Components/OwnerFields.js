@@ -1,5 +1,5 @@
 import React from "react";
-import OwnerSearch from "./OwnerSearch";
+import OwnerSearch from "../Components/OwnerSearch";
 
 function OwnerFields({
   onChange,

@@ -36,7 +36,7 @@ const DisplayTable = (props) => {
               <td key="risk">{ele.riskForum.toString()}</td>
               <td key="impactArea">{ele.impactArea}</td>
               <td key="creationDate">{ele.dhdCreationDate}</td>
-              <td key="reviewDate">Review Date</td>
+              <td key="reviewDate"></td>
               <td key="resolutionDate">{ele.issueResolutionDate}</td>
               <td key="status">{ele.status}</td>
               <td key="owner">{ownerNames(ele.ownerDetails)}</td>
