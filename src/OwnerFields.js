@@ -1,7 +1,13 @@
 import React from "react";
 import OwnerSearch from "./OwnerSearch";
 
-function OwnerFields({onChange, onChangeOwner, onOwnerAdd, ownerDetails}) {
+function OwnerFields({
+  onChange,
+  onChangeOwner,
+  onOwnerAdd,
+  ownerDetails,
+  onOwnerDelete,
+}) {
   return (
     <table className="table table-bordered">
       <thead className="table-primary">
@@ -21,7 +27,7 @@ function OwnerFields({onChange, onChangeOwner, onOwnerAdd, ownerDetails}) {
       </thead>
       <tbody>
         {ownerDetails.map((item, index) => (
-          <tr key={`owner_${index}`}>
+          <tr key={`owner_${item.id}`}>
             <td>
               <textarea
                 className="form-control form-control-sm"
@@ -29,10 +35,11 @@ function OwnerFields({onChange, onChangeOwner, onOwnerAdd, ownerDetails}) {
                 name="owner-actionDescription"
                 onChange={onChange}
                 defaultValue={""}
+                value={item["owner-actionDescription"]}
               />
             </td>
             <td className="pt-3">
-              <OwnerSearch onChange={onChangeOwner} />
+              <OwnerSearch onChange={onChangeOwner} index={index} />
             </td>
             <td className="pt-3">
               <input
@@ -50,6 +57,7 @@ function OwnerFields({onChange, onChangeOwner, onOwnerAdd, ownerDetails}) {
                 className="form-control form-control-sm"
                 id="target-closure-date"
                 name="owner-target-closure-date"
+                value={item["owner-target-closure-date"]}
                 onChange={(e) => onChange(e)}
               />
             </td>
@@ -59,13 +67,16 @@ function OwnerFields({onChange, onChangeOwner, onOwnerAdd, ownerDetails}) {
                 id="comments"
                 name="owner-comments"
                 onChange={(e) => onChange(e)}
+                value={item["owner-comments"]}
                 defaultValue={""}
               />
             </td>
             <td>
-              {/* <a href="">
-                    <i className="bi bi-trash" />
-                  </a> */}
+              {index > 0 ? (
+                <button onClick={() => onOwnerDelete(index)}>
+                  <i className="bi bi-trash" />
+                </button>
+              ) : null}
             </td>
           </tr>
         ))}

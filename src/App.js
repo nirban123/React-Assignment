@@ -3,13 +3,40 @@ import "./App.css";
 import OwnerFields from "./OwnerFields";
 import Controller from "./Controller";
 import DisplayTable from "./DisplayTable";
-
+const initialState = {
+  ownerDetails: [
+    {
+      id: 0,
+      "owner-actionDescription": "",
+      ownerId: "",
+      ownerName: "",
+      "owner-comments": "",
+      "owner-target-closure-date": "",
+    },
+  ],
+  riskForum: [],
+  category: "",
+  sbu: "",
+  account: "",
+  projectId: "",
+  severity: "",
+  region: "",
+  location: "",
+  rootCause: "",
+  itemDescription: "",
+  risk: "",
+  totalFTEs: "",
+  impactArea: "",
+  issueResolutionDate: "",
+  businessImpact: "",
+  status: "",
+  dhdIssueId: "",
+  revenueImpact: "",
+  marginImpact: "",
+};
 function App() {
   const [totalValues, setTotalValues] = useState([]);
-  const [values, setValues] = useState({
-    ownerDetails: [{}],
-    riskForum: [],
-  });
+  const [values, setValues] = useState(initialState);
 
   const changeHandler = (e) => {
     const name = e.target.name;
@@ -41,12 +68,12 @@ function App() {
     }
   };
 
-  const handleOwnerSelect = (selectedVal) => {
-    console.log("selectedVal", selectedVal);
+  const handleOwnerSelect = (selectedVal, index) => {
+    console.log("selectedVal", selectedVal, index);
     setValues((prevVal) => {
       let newVal = {...prevVal};
-      newVal.ownerDetails[0] = {
-        ...newVal.ownerDetails[0],
+      newVal.ownerDetails[index] = {
+        ...newVal.ownerDetails[index],
         ownerId: selectedVal.id,
         ownerName: selectedVal.name,
       };
@@ -57,7 +84,10 @@ function App() {
   const handleOwnerAdd = () => {
     setValues((prevVal) => ({
       ...prevVal,
-      ownerDetails: [...prevVal.ownerDetails, {}],
+      ownerDetails: [
+        ...prevVal.ownerDetails,
+        {id: prevVal.ownerDetails[prevVal.ownerDetails.length - 1].id + 1},
+      ],
     }));
   };
 
@@ -66,6 +96,16 @@ function App() {
     //fetch API
     await Controller(values);
     setTotalValues((totalValues) => [...totalValues, values]);
+    setValues(JSON.parse(JSON.stringify(initialState)));
+  };
+  console.log(values);
+  const deleteHandler = (index) => {
+    setValues((prevVal) => {
+      let newVal = {...prevVal};
+      //delete newVal.ownerDetails[id];
+      newVal.ownerDetails.splice(index, 1);
+      return newVal;
+    });
   };
 
   console.log(totalValues);
@@ -82,6 +122,7 @@ function App() {
               className="form-select form-select-sm form-control form-control-sm"
               id="sbu"
               name="sbu"
+              value={values.sbu}
               onChange={(e) => changeHandler(e)}
               required>
               <option value="">Select sbu</option>
@@ -98,6 +139,7 @@ function App() {
               className="form-control form-control-sm"
               id="account"
               name="account"
+              value={values.account}
               onChange={(e) => changeHandler(e)}
               required
             />
@@ -111,6 +153,7 @@ function App() {
               className="form-select form-select-sm form-control form-control-sm"
               id="projectId"
               name="projectId"
+              value={values.projectId}
               onChange={(e) => changeHandler(e)}
               required>
               <option value="">Select Project Id</option>
@@ -127,9 +170,10 @@ function App() {
               className="form-select form-select-sm  form-control form-control-sm"
               id="category"
               name="category"
+              value={values.category}
               onChange={(e) => changeHandler(e)}
               required>
-              <option value>Select Category</option>
+              <option value="">Select Category</option>
               <option value="Category1">Category1</option>
               <option value="Category2">Category2</option>
             </select>
@@ -145,6 +189,7 @@ function App() {
               className="form-control form-control-sm"
               id="escalationDate"
               name="escalationDate"
+              value={values.escalationDate}
               onChange={(e) => changeHandler(e)}
             />
           </div>
@@ -157,6 +202,7 @@ function App() {
               id="severity"
               name="severity"
               onChange={(e) => changeHandler(e)}
+              value={values.severity}
               required>
               <option value="">Select Severity</option>
               <option value="High">High</option>
@@ -173,6 +219,7 @@ function App() {
               className="form-control form-control-sm"
               id="region"
               name="region"
+              value={values.region}
               onChange={(e) => changeHandler(e)}
               required
             />
@@ -186,6 +233,7 @@ function App() {
               className="form-control form-control-sm"
               id="location"
               name="location"
+              value={values.location}
               onChange={(e) => changeHandler(e)}
               required
             />
@@ -202,6 +250,7 @@ function App() {
               className="form-control form-control-sm"
               id="risk"
               name="risk"
+              value={values.risk}
               onChange={(e) => changeHandler(e)}
               required
               defaultValue={""}
@@ -215,6 +264,7 @@ function App() {
               className="form-control form-control-sm"
               id="rootCause"
               name="rootCause"
+              value={values.rootCause}
               onChange={(e) => changeHandler(e)}
               defaultValue={""}
             />
@@ -231,6 +281,7 @@ function App() {
               className="form-control form-control-sm"
               rows={5}
               id="itemDescription"
+              value={values.itemDescription}
               name="itemDescription"
               onChange={(e) => changeHandler(e)}
               required
@@ -246,6 +297,7 @@ function App() {
               className="form-control form-control-sm"
               rows={5}
               id="currentState"
+              value={values.currentState}
               name="currentState"
               onChange={(e) => changeHandler(e)}
               defaultValue={""}
@@ -259,6 +311,7 @@ function App() {
             onChangeOwner={handleOwnerSelect}
             onOwnerAdd={handleOwnerAdd}
             ownerDetails={values.ownerDetails}
+            onOwnerDelete={deleteHandler}
           />
         </div>
         <div className="row">
@@ -269,6 +322,7 @@ function App() {
             <input
               type="text"
               className="form-control form-control-sm"
+              value={values.totalFTEs}
               id="totalFTEs"
               name="totalFTEs"
               onChange={(e) => changeHandler(e)}
@@ -282,6 +336,7 @@ function App() {
               className="form-select form-select-sm form-control form-control-sm"
               id="impactArea"
               name="impactArea"
+              value={values.impactArea}
               onChange={(e) => changeHandler(e)}
               required>
               <option value="">Select Impact Area</option>
@@ -299,6 +354,7 @@ function App() {
               className="form-control form-control-sm"
               id="issueResolutionDate"
               name="issueResolutionDate"
+              value={values.issueResolutionDate}
               onChange={(e) => changeHandler(e)}
             />
           </div>
@@ -310,6 +366,7 @@ function App() {
               type="text"
               className="form-control form-control-sm"
               name="dhdIssueId"
+              value={values.dhdIssueId}
               id="dhdIssueId"
               onChange={(e) => changeHandler(e)}
             />
@@ -325,6 +382,7 @@ function App() {
               className="form-control form-control-sm"
               id="dhdCreationDate"
               name="dhdCreationDate"
+              value={values.dhdCreationDate}
               onChange={(e) => changeHandler(e)}
               disabled
             />
@@ -338,6 +396,7 @@ function App() {
               className="form-control form-control-sm"
               id="businessImpact"
               name="businessImpact"
+              value={values.businessImpact}
               onChange={(e) => changeHandler(e)}
             />
           </div>
@@ -351,6 +410,7 @@ function App() {
               className="form-control form-control-sm"
               id="revenueImpact"
               name="revenueImpact"
+              value={values.revenueImpact}
               onChange={(e) => changeHandler(e)}
             />
           </div>
@@ -363,6 +423,7 @@ function App() {
               className="form-control form-control-sm"
               name="marginImpact"
               id="marginImpact"
+              value={values.marginImpact}
               onChange={(e) => changeHandler(e)}
             />
           </div>
@@ -419,6 +480,7 @@ function App() {
               className="form-select form-select-sm form-control form-control-sm"
               id="status"
               name="status"
+              value={values.status}
               required
               onChange={(e) => changeHandler(e)}>
               <option value="">Select Status</option>
@@ -439,7 +501,7 @@ function App() {
       </form>
       <br />
       <div className="row">
-        {totalValues.length > 0 ? <DisplayTable data={totalValues} /> : ""}
+        {totalValues.length > 0 ? <DisplayTable data={totalValues} /> : null}
       </div>
     </div>
   );

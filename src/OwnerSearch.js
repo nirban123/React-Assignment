@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useState, useRef} from "react";
 
 const OWNERS = [
   {
@@ -15,9 +15,10 @@ const OWNERS = [
   },
 ];
 
-function OwnerSearch({ onChange }) {
+function OwnerSearch({onChange, index}) {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResult, setSearchResult] = useState([]);
+  const newRef = useRef(null);
 
   const handleSearch = (e) => {
     const searchValue = e.target.value;
@@ -27,7 +28,7 @@ function OwnerSearch({ onChange }) {
     // If search query perform search
     if (searchValue) {
       const sResult = OWNERS.filter((item) =>
-        item.id.startsWith(searchValue) ? true : false
+        item.id.startsWith(searchValue) ? true : false,
       );
       setSearchResult(sResult);
     } else {
@@ -36,23 +37,22 @@ function OwnerSearch({ onChange }) {
   };
 
   const handleSelect = (elm) => {
-    // setSearchResult([]);
-    onChange(elm);
+    onChange(elm, index);
+    newRef.current.style.display = "none";
   };
 
   const renderSearchHints = () => {
     if (searchQuery) {
       if (searchResult && searchResult.length) {
         return (
-          <div className="hints-wrapper">
+          <div className="hints-wrapper" ref={newRef}>
             <ul className="list-group">
               {searchResult.map((elm) => (
                 <li
                   key={elm.id}
                   className="list-group-item list-group-item-action"
                   role="presentation"
-                  onClick={() => handleSelect(elm)}
-                >
+                  onClick={() => handleSelect(elm)}>
                   {elm.name}
                 </li>
               ))}

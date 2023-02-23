@@ -1,6 +1,10 @@
 import React from "react";
 
 const DisplayTable = (props) => {
+  function ownerNames(ownerDetails) {
+    let results = ownerDetails.map((ele, index) => ele["ownerName"]);
+    return results.join(",");
+  }
   return (
     <>
       <table className="table table-bordered">
@@ -35,7 +39,7 @@ const DisplayTable = (props) => {
               <td key="reviewDate">Review Date</td>
               <td key="resolutionDate">{ele.issueResolutionDate}</td>
               <td key="status">{ele.status}</td>
-              <td key="owner">Owner</td>
+              <td key="owner">{ownerNames(ele.ownerDetails)}</td>
               <td key="eye">
                 <i className="bi bi-eye"></i>
               </td>
