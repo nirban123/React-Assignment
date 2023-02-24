@@ -2,7 +2,7 @@ import React from "react";
 
 const DisplayTable = (props) => {
   function ownerNames(ownerDetails) {
-    let results = ownerDetails.map((ele, index) => ele["ownerName"]);
+    let results = ownerDetails.map((ele) => ele["ownerName"]);
     return results.join(",");
   }
   return (

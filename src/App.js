@@ -28,15 +28,22 @@ function App() {
         }
         return {...values, [name]: value};
       });
-    } else if (name.startsWith("owner-")) {
-      setValues((prevVal) => {
-        let newVal = {...prevVal};
-        newVal.ownerDetails[0] = {...newVal.ownerDetails[0], [name]: value};
-        return newVal;
-      });
     } else {
       setValues((values) => ({...values, [name]: value}));
     }
+  };
+
+  const ownerChangeHandler = (e, index) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    setValues((prevVal) => {
+      let newVal = {...prevVal};
+      newVal.ownerDetails[index] = {
+        ...newVal.ownerDetails[index],
+        [name]: value,
+      };
+      return newVal;
+    });
   };
 
   const handleOwnerSelect = (selectedVal, index) => {
@@ -79,7 +86,7 @@ function App() {
     });
   };
 
-  console.log(totalValues);
+  console.log(totalValues, values);
 
   return (
     <div className="container mt-3">
@@ -224,7 +231,6 @@ function App() {
               value={values.risk}
               onChange={(e) => changeHandler(e)}
               required
-              defaultValue={""}
             />
           </div>
           <div className="col-1"></div>
@@ -237,7 +243,6 @@ function App() {
               name="rootCause"
               value={values.rootCause}
               onChange={(e) => changeHandler(e)}
-              defaultValue={""}
             />
           </div>
         </div>
@@ -256,7 +261,6 @@ function App() {
               name="itemDescription"
               onChange={(e) => changeHandler(e)}
               required
-              defaultValue={""}
             />
           </div>
           <div className="col-1"></div>
@@ -271,14 +275,13 @@ function App() {
               value={values.currentState}
               name="currentState"
               onChange={(e) => changeHandler(e)}
-              defaultValue={""}
             />
           </div>
         </div>
         <br />
         <div className="row">
           <OwnerFields
-            onChange={changeHandler}
+            onChange={ownerChangeHandler}
             onChangeOwner={handleOwnerSelect}
             onOwnerAdd={handleOwnerAdd}
             ownerDetails={values.ownerDetails}

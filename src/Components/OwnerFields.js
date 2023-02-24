@@ -33,8 +33,7 @@ function OwnerFields({
                 className="form-control form-control-sm"
                 id="actionDescription"
                 name="owner-actionDescription"
-                onChange={onChange}
-                defaultValue={""}
+                onChange={(e) => onChange(e, index)}
                 value={item["owner-actionDescription"]}
               />
             </td>
@@ -58,7 +57,7 @@ function OwnerFields({
                 id="target-closure-date"
                 name="owner-target-closure-date"
                 value={item["owner-target-closure-date"]}
-                onChange={(e) => onChange(e)}
+                onChange={(e) => onChange(e, index)}
               />
             </td>
             <td>
@@ -66,9 +65,8 @@ function OwnerFields({
                 className="form-control form-control-sm"
                 id="comments"
                 name="owner-comments"
-                onChange={(e) => onChange(e)}
+                onChange={(e) => onChange(e, index)}
                 value={item["owner-comments"]}
-                defaultValue={""}
               />
             </td>
             <td>
