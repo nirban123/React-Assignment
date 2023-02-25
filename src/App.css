@@ -36,3 +36,21 @@
     transform: rotate(360deg);
   }
 }
+@media (max-width: 567px) {
+  .row {
+    margin: auto;
+    text-align: center;
+  }
+  .table-row {
+    overflow-x: scroll;
+  }
+  .button-search {
+    padding-left: 21px;
+  }
+}
+
+@media (min-width: 768px) {
+  .button-end {
+    text-align: end;
+  }
+}

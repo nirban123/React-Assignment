@@ -14,6 +14,7 @@ const OWNERS = [
     name: "Mathue",
   },
 ];
+const ownerInitialState = {};
 
 function OwnerSearch({onChange, index}) {
   const [searchQuery, setSearchQuery] = useState("");
@@ -78,11 +79,13 @@ function OwnerSearch({onChange, index}) {
           type="text"
           className="form-control"
           name="search"
-          value={searchQuery}
+          value={searchQuery ? searchQuery : null}
           onChange={handleSearch}
         />
         <div className="input-group-append">
-          <button className="btn btn-outline-secondary" type="button">
+          <button
+            className="btn btn-outline-secondary button-search"
+            type="button">
             <i className="bi bi-search" />
           </button>
         </div>

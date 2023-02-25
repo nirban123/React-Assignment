@@ -23,6 +23,7 @@ export const initialState = {
   totalFTEs: "",
   impactArea: "",
   issueResolutionDate: "",
+  escalationDate: "",
   businessImpact: "",
   status: "",
   dhdIssueId: "",

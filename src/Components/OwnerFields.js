@@ -13,8 +13,8 @@ function OwnerFields({
       <thead className="table-primary">
         <tr>
           <th scope="col">
-            <button type="button" onClick={onOwnerAdd}>
-              Action Description{" "}
+            Action Description&nbsp;
+            <button type="button" className="noBorder" onClick={onOwnerAdd}>
               <i className="bi bi-plus-circle-fill blue-color" />
             </button>
           </th>

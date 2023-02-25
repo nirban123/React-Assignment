@@ -91,8 +91,8 @@ function App() {
   return (
     <div className="container mt-3">
       <form onSubmit={handleSubmit}>
-        <div className="row">
-          <div className="col p-2">
+        <div className="row center-aligned">
+          <div className="col-md p-2">
             <label htmlFor="sbu" className="form-label">
               SBU <span className="text-danger">*</span>
             </label>
@@ -108,7 +108,7 @@ function App() {
               <option value="DFS">DFS</option>
             </select>
           </div>
-          <div className="col p-2">
+          <div className="col-md p-2">
             <label htmlFor="account" className="form-label">
               Account <span className="text-danger">*</span>
             </label>
@@ -122,8 +122,8 @@ function App() {
               required
             />
           </div>
-          <div className="col-1"></div>
-          <div className="col p-2 ">
+          <div className="col-md-1"></div>
+          <div className="col-md p-2 ">
             <label htmlFor="projectid" className="form-label">
               Project Id <span className="text-danger">*</span>
             </label>
@@ -140,7 +140,7 @@ function App() {
               <option value="2236">2236</option>
             </select>
           </div>
-          <div className="col p-2">
+          <div className="col-md p-2">
             <label htmlFor="category" className="form-label">
               Category <span className="text-danger">*</span>
             </label>
@@ -158,7 +158,7 @@ function App() {
           </div>
         </div>
         <div className="row">
-          <div className="col p-2">
+          <div className="col-md p-2">
             <label htmlFor="escalationDate" className="form-label">
               Escalation Date
             </label>
@@ -171,7 +171,7 @@ function App() {
               onChange={(e) => changeHandler(e)}
             />
           </div>
-          <div className="col p-2">
+          <div className="col-md p-2">
             <label htmlFor="severity" className="form-label">
               Severity <span className="text-danger">*</span>
             </label>
@@ -187,8 +187,8 @@ function App() {
               <option value="Low">Low</option>
             </select>
           </div>
-          <div className="col-1"></div>
-          <div className="col p-2">
+          <div className="col-md-1"></div>
+          <div className="col-md p-2">
             <label htmlFor="region" className="form-label">
               Region <span className="text-danger">*</span>
             </label>
@@ -202,7 +202,7 @@ function App() {
               required
             />
           </div>
-          <div className="col p-2">
+          <div className="col-md p-2">
             <label htmlFor="location" className="form-label">
               Location <span className="text-danger">*</span>
             </label>
@@ -218,7 +218,7 @@ function App() {
           </div>
         </div>
         <div className="row">
-          <div className="col p-2">
+          <div className="col-md p-2">
             <label htmlFor="risk" className="form-label">
               Risk/Issue Statement{" "}
               <span className="bi bi-info-circle-fill blue-color"> </span>{" "}
@@ -233,8 +233,8 @@ function App() {
               required
             />
           </div>
-          <div className="col-1"></div>
-          <div className="col p-2">
+          <div className="col-md-1"></div>
+          <div className="col-md p-2">
             Root Cause{" "}
             <span className="bi bi-info-circle-fill blue-color"> </span>
             <textarea
@@ -247,7 +247,7 @@ function App() {
           </div>
         </div>
         <div className="row">
-          <div className="col p-2">
+          <div className="col-md p-2">
             <label htmlFor="itemDescription" className="form-label">
               Item Description{" "}
               <span className="bi bi-info-circle-fill blue-color"> </span>{" "}
@@ -263,8 +263,8 @@ function App() {
               required
             />
           </div>
-          <div className="col-1"></div>
-          <div className="col p-2">
+          <div className="col-md-1"></div>
+          <div className="col-md p-2">
             <label htmlFor="currentState" className="form-label">
               Current State
             </label>
@@ -279,7 +279,7 @@ function App() {
           </div>
         </div>
         <br />
-        <div className="row">
+        <div className="row table-row">
           <OwnerFields
             onChange={ownerChangeHandler}
             onChangeOwner={handleOwnerSelect}
@@ -289,7 +289,7 @@ function App() {
           />
         </div>
         <div className="row">
-          <div className="col p-2">
+          <div className="col-md p-2">
             <label htmlFor="totalFTEs" className="form-label">
               Total FTEs<span className="text-danger">*</span>
             </label>
@@ -302,7 +302,7 @@ function App() {
               onChange={(e) => changeHandler(e)}
             />
           </div>
-          <div className="col p-2">
+          <div className="col-md p-2">
             <label htmlFor="impactArea" className="form-label">
               Impact Area <span className="text-danger">*</span>
             </label>
@@ -318,8 +318,8 @@ function App() {
               <option value="Impact Area2">Impact Area2</option>
             </select>
           </div>
-          <div className="col-sm-1"></div>
-          <div className="col p-2">
+          <div className="col-md-1"></div>
+          <div className="col-md p-2">
             <label htmlFor="issueResolutionDate" className="form-label">
               Issue Resolution Date <span className="text-danger">*</span>
             </label>
@@ -332,7 +332,7 @@ function App() {
               onChange={(e) => changeHandler(e)}
             />
           </div>
-          <div className="col p-2">
+          <div className="col-md p-2">
             <label htmlFor="dhdIssueId" className="form-label">
               DHD Issue Id
             </label>
@@ -347,7 +347,7 @@ function App() {
           </div>
         </div>
         <div className="row">
-          <div className="col p-2">
+          <div className="col-md p-2">
             <label htmlFor="dhdCreationDate" className="form-label">
               DHD Creation Date
             </label>
@@ -361,7 +361,7 @@ function App() {
               disabled
             />
           </div>
-          <div className="col p-2">
+          <div className="col-md p-2">
             <label htmlFor="businessImpact" className="form-label">
               Business Impact <span className="text-danger">*</span>
             </label>
@@ -374,8 +374,8 @@ function App() {
               onChange={(e) => changeHandler(e)}
             />
           </div>
-          <div className="col-sm-1"></div>
-          <div className="col p-2">
+          <div className="col-md-1"></div>
+          <div className="col-md p-2">
             <label htmlFor="revenueImpact" className="form-label">
               Revenue Impact-FY&apos;23($ MM)
             </label>
@@ -388,7 +388,7 @@ function App() {
               onChange={(e) => changeHandler(e)}
             />
           </div>
-          <div className="col p-2">
+          <div className="col-md p-2">
             <label htmlFor="marginImpact" className="form-label">
               Margin Impact-FY&apos;23($ MM)
             </label>
@@ -403,7 +403,7 @@ function App() {
           </div>
         </div>
         <div className="row">
-          <div className="col pt-2">
+          <div className="col-md pt-2">
             Risk Forum
             <br />
             <div className="form-check  form-check-inline">
@@ -446,7 +446,7 @@ function App() {
               </label>
             </div>
           </div>
-          <div className="col pt-2">
+          <div className="col-md pt-2">
             <label htmlFor="status" className="form-label">
               Status <span className="text-danger">*</span>
             </label>
@@ -467,8 +467,8 @@ function App() {
           <div className="col p-2"></div>
         </div>
         <br />
-        <div className="row">
-          <div className="col text-end">
+        <div className="row button-end">
+          <div className="col">
             <input type="submit" className="btn btn-info text-white" />
           </div>
         </div>
